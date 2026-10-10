@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState, useCallback } from "react";
 import { MESSAGE_TYPES } from "../websocket/messageTypes";
 import type { RoomState } from "../types/game";
+import { WS_URL } from "../constant/wsurl";
 
 interface SocketContextValue {
     isConnected: boolean;
@@ -13,8 +14,6 @@ interface SocketContextValue {
 }
 
 const SocketContext = createContext<SocketContextValue | null>(null);
-
-const WS_URL = "ws://localhost:3000/ws";
 
 export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const socketRef = useRef<WebSocket | null>(null);
