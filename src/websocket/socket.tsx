@@ -1,5 +1,4 @@
-// const WS_URL = "ws://localhost:3000/ws";
-const WS_URL = "wss://gamebox-backend-gdfm.onrender.com/ws";
+import { WS_URL } from "../constant/wsurl";
 
 let socket: WebSocket | null = null;
 
