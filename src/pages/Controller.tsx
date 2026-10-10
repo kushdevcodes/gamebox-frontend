@@ -1,5 +1,5 @@
 // src/pages/ControllerView.tsx
-import { useEffect, useCallback, useState, useRef } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { useSocket } from "../context/SocketContext";
 import { MESSAGE_TYPES } from "../websocket/messageTypes";
 import { useNavigate, useParams } from "react-router-dom";
