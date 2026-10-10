@@ -11,10 +11,10 @@ export default function Screen() {
 
   // Configure Unity WebGL Loader
   const { unityProvider, sendMessage: sendToUnity, isLoaded, loadingProgression } = useUnityContext({
-    loaderUrl: "/unity/game.js",
-    dataUrl: "/unity/game.data",
-    frameworkUrl: "/unity/game.framework.js",
-    codeUrl: "/unity/game.wasm",
+    loaderUrl: "/unity/4/game.js",
+    dataUrl: "/unity/4/game.data",
+    frameworkUrl: "/unity/4/game.framework.js",
+    codeUrl: "/unity/4/game.wasm",
   });
 
   // Use refs to prevent stale closures when WebSockets deliver high-frequency input
@@ -54,9 +54,9 @@ export default function Screen() {
 
       console.log("[Screen] Forwarding to Unity GameManager:", payload);
 
-      // Matches the GameObject "GameManager" and C# method "OnControllerInput"
+      // Matches the GameObject "GameboxManager" and C# method "OnControllerInput"
       try {
-        sendToUnityRef.current("GameManager", "OnControllerInput", payload);
+        sendToUnityRef.current("GameboxManager", "OnControllerInput", payload);
       } catch (err) {
         console.error("[Screen] Failed to send input to Unity:", err);
       }
@@ -96,8 +96,11 @@ export default function Screen() {
             </div>
           )}
 
-          <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-black">
-            <Unity unityProvider={unityProvider} style={{ width: 960, height: 600 }} />
+          <div className="overflow-hidden shadow-2xl border border-slate-800 bg-black w-full max-w-5xl aspect-video flex items-center justify-center">
+            <Unity
+              unityProvider={unityProvider}
+              style={{ width: "100%", height: "100%", display: "block" }}
+            />
           </div>
         </div>
       </div>
@@ -134,11 +137,10 @@ export default function Screen() {
           {roomState.players.map((player) => (
             <div
               key={player.playerId}
-              className={`px-5 py-3 rounded-xl border font-mono text-sm flex items-center gap-2 ${
-                player.role === "HOST"
+              className={`px-5 py-3 rounded-xl border font-mono text-sm flex items-center gap-2 ${player.role === "HOST"
                   ? "bg-slate-900 border-slate-800 text-slate-500"
                   : "bg-indigo-950/60 border-indigo-500/50 text-indigo-200"
-              }`}
+                }`}
             >
               <span>{player.role === "HOST" ? "🖥️ TV Host" : "🎮 Controller"}</span>
               <span className="text-xs text-slate-400">({player.playerId.slice(0, 4)})</span>
